@@ -431,8 +431,10 @@ function! s:key_quit() " {{{
     let &maxfuncdepth = b:session.backup.maxfuncdepth
     let &guifont = b:session.backup.guifont
     let &updatetime = b:session.backup.updatetime
-    let &columns = b:session.backup.columns
-    let &lines = b:session.backup.lines
+    if has('gui_running')
+        let &columns = b:session.backup.columns
+        let &lines = b:session.backup.lines
+    endif
     bdelete!
   endif
 endfunction " }}}
@@ -483,8 +485,10 @@ function! puyo#new() " {{{
 
   let &l:updatetime = get(g:,'puyo#updatetime',500)
   let &l:maxfuncdepth = 1000
-  let &columns = 9999
-  let &lines = 999
+  if has('gui_running')
+    let &columns = 9999
+    let &lines = 999
+  endif
 
   if exists('g:puyo#guifont')
     let &l:guifont = g:puyo#guifont
